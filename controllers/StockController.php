@@ -35,6 +35,7 @@ class StockController extends Controller
     
     public function actionIndex()
     {
+        $user = Yii::$app->user;
         $dataProvider = new ActiveDataProvider();
         $dataProvider = new ActiveDataProvider([
             'query' => Stock::find(),
@@ -45,6 +46,7 @@ class StockController extends Controller
         
         return $this->render('index', [
             'provider' => $dataProvider,
+            'user' => $user,
         ]);
     }
 }
