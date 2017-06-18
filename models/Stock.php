@@ -22,7 +22,8 @@ class Stock extends ActiveRecord {
 
     public function rules() {
         return [
-            [['id', 'price', 'count'], 'integer'],
+            [['id'], 'integer'],
+            [['price', 'count'], 'double'],
             [['name', 'type'], 'string'],
         ];
     }

@@ -15,8 +15,8 @@ class m170617_084815_create_stock_table extends Migration
         $this->createTable('stock', [
             'id' => $this->primaryKey(),
             'name'=>$this->string(255),
-            'price'=>$this->integer(),
-            'count'=>$this->integer(),
+            'price'=>$this->double(),
+            'count'=>$this->double(),
             'type'=>$this->string(255)->notNull(),
         ]);
     }

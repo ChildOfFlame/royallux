@@ -2,13 +2,16 @@
     
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use yii\widgets\Pjax;
 
 $this->title="Авторизация";?>
 <div class="overlay">
     <div class="authrization-form">
         <h2><?=Html::encode($this->title)?></h2>
+        <?php Pjax::begin();?>
         <?php $form = ActiveForm::begin([
             'id'                     => "auth-form",
+            'options'                =>["data-pjax"=>true],
             'fieldConfig'            =>[
                 'template' =>"<div class='input-group'>{label}{input}</div>"
             ]
@@ -29,5 +32,6 @@ $this->title="Авторизация";?>
             <?=HTML::submitButton("Войти",["class"=>"submitBtn"])?>
             <div class="clear"></div>
         <?php ActiveForm::end();?>
+        <?php Pjax::end();?>
     </div>
 </div>
