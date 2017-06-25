@@ -1,18 +1,19 @@
 $(document).ready(function(event){
-	$('.submitBtn').click(function(event){
-		var error = false;
-		$('.form-control').each(function(){
-			console.log($(this));
-			if (!$(this).val()) {
-				$(this).addClass('error');
-				error = true;
-			}
-			else{
-				$(this).removeClass('error');
-			}
-		});
-		if (error) {
-			event.preventDefault();
-		}
-	});
+
+	/*
+	 * fadeIn/fadeOut preloader while pjax autorization
+	 */
+
+	 $("#load").on("pjax:beforeSend",function(){
+	 	$("#preloader").fadeIn();
+	 });
+	 $("#load").on("pjax:end",function(){
+	 	$("#preloader").fadeOut();
+	 });
+	/*
+	 * pjax reload table after search
+	 */
+	$("#search").on("pjax:end",function(){
+        $.pjax.reload({container: "#table"});
+    });
 });

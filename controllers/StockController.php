@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\rbac\AccessControl;
 use app\models\Stock;
+use app\models\search\StockSearch;
 use yii\data\ActiveDataProvider;
 use app\rbac\Perms;
 use Yii;
@@ -36,16 +37,12 @@ class StockController extends Controller
     public function actionIndex()
     {
         $user = Yii::$app->user;
-        $dataProvider = new ActiveDataProvider();
-        $dataProvider = new ActiveDataProvider([
-            'query' => Stock::find(),
-            'pagination' => [
-                'pageSize' => 20,
-        ],
-]);
+        $searchModel = new StockSearch();
+        $dataProvider= $searchModel->search(Yii::$app->request->get());
         
         return $this->render('index', [
             'provider' => $dataProvider,
+            'searchModel' => $searchModel,
             'user' => $user,
         ]);
     }

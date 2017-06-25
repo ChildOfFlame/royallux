@@ -8,7 +8,7 @@ $this->title="Авторизация";?>
 <div class="overlay">
     <div class="authrization-form">
         <h2><?=Html::encode($this->title)?></h2>
-        <?php Pjax::begin();?>
+        <?php Pjax::begin(['id'=>"load"]);?>
         <?php $form = ActiveForm::begin([
             'id'                     => "auth-form",
             'options'                =>["data-pjax"=>true],
@@ -33,5 +33,17 @@ $this->title="Авторизация";?>
             <div class="clear"></div>
         <?php ActiveForm::end();?>
         <?php Pjax::end();?>
+    </div>
+    <div id="preloader">
+        <div class="ball-spin-fade-loader">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
     </div>
 </div>

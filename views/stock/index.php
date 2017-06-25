@@ -9,6 +9,7 @@ use yii\grid\SerialColumn;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\View;
+use yii\widgets\Pjax;
 
 /* @var $this View */
 /* @var $provider ActiveDataProvider */
@@ -17,15 +18,11 @@ use yii\web\View;
 <div class="detail">
 	<div class="detail_head">
 		<?= HTML::a("<span class='glyphicon glyphicon-arrow-left'></span>",Url::to(['site/index']),["class"=>"back_btn"]);?>
-		<?=HTML::beginForm(Url::to(['Stock/search']),"get",["class"=>"search"]);?>
-		<?=HTML::input("text","search_string",'',["placeholder"=>"Поиск..."]);?>
-		<div class="search_btn">
-			<?=HTML::submitButton("<span class='glyphicon glyphicon-search'></span>",["name"=>"search_btn"])?>
-		</div>
-		<?=HTML::endForm();?>
+        <?=$this->render('_search',["model"=>$searchModel]);?>
 		<div class="title">Склад</div>
 		<div class="person_lk"><?=HTML::a($user->identity->name ."<span class='glyphicon glyphicon-user'></span>",Url::to(["user/personal"]));?></div>
 	</div>
+    <?php Pjax::begin(["id"=>"table"]);?>
 <?= GridView::widget([
     'dataProvider' => $provider,
     'layout'=>"{items}\n{pager}",
@@ -64,5 +61,6 @@ use yii\web\View;
             ],
         ],
     ],
-]) ?>
+]);?>
+<?php Pjax::end();?>
 </div>
